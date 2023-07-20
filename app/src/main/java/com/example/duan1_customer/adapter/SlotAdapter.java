@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_customer.R;
+import com.example.duan1_customer.database.BillDAO;
 import com.example.duan1_customer.model.Slot;
 
 import java.util.ArrayList;
@@ -52,9 +53,9 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>{
             if(list.get(position).getTime().equals(slotPick)){
                 holder.tvTime.setBackgroundColor(R.color.yellow);
             }
-            if(Integer.parseInt(list.get(position).getTime().substring(0,1))<date.getHours()){
+            if(Integer.parseInt(list.get(position).getTime().substring(0,2))<date.getHours()){
                 holder.tvTime.setBackgroundColor(R.color.black);
-            }else if(Integer.parseInt(list.get(position).getTime().substring(0,1))==date.getHours() &&
+            }else if(Integer.parseInt(list.get(position).getTime().substring(0,2))==date.getHours() &&
                     Integer.parseInt(list.get(position).getTime().substring(3,4))<date.getMinutes()){
                 holder.tvTime.setBackgroundColor(R.color.black);
             }
@@ -65,6 +66,12 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder>{
                 slotPick = holder.tvTime.getText().toString();
                 btnFinish.setBackgroundColor(R.color.yellow);
                 loadData();
+                btnFinish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
         });
     }
