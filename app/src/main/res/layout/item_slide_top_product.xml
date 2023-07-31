@@ -96,7 +96,7 @@
             android:id="@+id/btnBuy"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:background="#FAE208"
+            android:background="#A2E3A5"
             android:orientation="horizontal">
 
             <TextView

@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#7B7979"
+        android:background="#6CC170"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
@@ -40,7 +40,7 @@
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="5dp"
                         android:id="@+id/name"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:layout_width="match_parent"
@@ -48,11 +48,11 @@
                         android:text="Thanh Hòa"/>
                     <TextView
                         android:layout_marginBottom="5dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_width="match_parent"
-                        android:layout_height="15dp"
+                        android:layout_height="17dp"
                         android:text="Muốn Dzai đến Zero5"/>
 
 
@@ -565,7 +565,8 @@
                                 android:layout_marginTop="17dp"
                                 android:gravity="center"
                                 android:layout_marginStart="13dp"
-                                android:background="@drawable/hexagon">
+                                android:background="@drawable/hexagon"
+                                android:backgroundTint="#47C14C">
                                 <TextView
                                     android:text="07"
                                     android:textAlignment="center"
@@ -607,7 +608,8 @@
                                 android:layout_marginTop="17dp"
                                 android:gravity="center"
                                 android:layout_marginStart="13dp"
-                                android:background="@drawable/hexagon">
+                                android:background="@drawable/hexagon"
+                                android:backgroundTint="#47C14C">
                                 <TextView
                                     android:text="30"
                                     android:textAlignment="center"
@@ -664,7 +666,8 @@
                                 android:layout_marginTop="17dp"
                                 android:gravity="center"
                                 android:layout_marginStart="13dp"
-                                android:background="@drawable/hexagon">
+                                android:background="@drawable/hexagon"
+                                android:backgroundTint="#47C14C">
                                 <TextView
                                     android:text="07"
                                     android:textAlignment="center"
@@ -706,7 +709,8 @@
                                 android:layout_marginTop="17dp"
                                 android:gravity="center"
                                 android:layout_marginStart="13dp"
-                                android:background="@drawable/hexagon">
+                                android:background="@drawable/hexagon"
+                                android:backgroundTint="#47C14C">
                                 <TextView
                                     android:text="20%"
                                     android:textAlignment="center"
