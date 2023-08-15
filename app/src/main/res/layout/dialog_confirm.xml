@@ -2,14 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bạn chắc chứ?"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:paddingVertical="30dp"
-        android:textSize="30sp"/>
+        android:layout_height="150dp"
+        android:background="@drawable/background_dialog_newpass"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Xác nhận Đăng Xuất?"
+            android:textSize="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/background_btn_no"
+                android:text="Hủy"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@id/btnChange"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:background="@drawable/background_btn_yes"
+                android:text="Xác nhận"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

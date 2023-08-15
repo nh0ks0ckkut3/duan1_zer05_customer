@@ -18,7 +18,7 @@ public class WelComeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wel_come);
         btnStart = findViewById(R.id.textView2);
 
-        Intent intent = new Intent(WelComeActivity.this,LoginActivity.class);
+        Intent intent = new Intent(WelComeActivity.this, LoginRegisterActivity.class);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

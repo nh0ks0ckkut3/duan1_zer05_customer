@@ -1,8 +1,11 @@
 package com.example.duan1_customer.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Bill implements Serializable {
+    @SerializedName("idBill")
     private int id;
     private String phoneNumberCustomer;
     private String userNameEmployee;
@@ -23,6 +26,15 @@ public class Bill implements Serializable {
         this.nameEmployee = nameEmployee;
         this.nameProduct = nameProduct;
         this.nameService = nameService;
+    }
+
+    public Bill(int id, String phoneNumberCustomer, String userNameEmployee, String time, String status, int totalPrice) {
+        this.id = id;
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.time = time;
+        this.status = status;
+        this.totalPrice = totalPrice;
     }
 
     public String getNameEmployee() {

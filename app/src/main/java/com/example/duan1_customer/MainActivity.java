@@ -31,17 +31,24 @@ import com.example.duan1_customer.fragment.NewsFragment;
 import com.example.duan1_customer.fragment.ShopFragment;
 import com.example.duan1_customer.model.Customer;
 import com.example.duan1_customer.model.Service;
+import com.example.duan1_customer.model.ServiceAPI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     Fragment fragment;
     FrameLayout fl_main;
-    Customer customerCurrent;
+    public Customer customerCurrent;
     CustomerDAO customerDAO;
     ServiceDAO serviceDAO;
     ArrayList<Service> listServiceChose;
@@ -54,13 +61,25 @@ public class MainActivity extends AppCompatActivity {
         fl_main = findViewById(R.id.fl_main);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        customerCurrent = (Customer) bundle.getSerializable("customerCurrent");
+//        customerCurrent = (Customer) bundle.getSerializable("customerCurrent");
+        String phoneNumber =  bundle.getString("phoneNumberCustomer");
+        String passWord = bundle.getString("passWord");
+        String name = bundle.getString("name");
+        int age = bundle.getInt("age");
+        String gender = bundle.getString("gender");
+        int totalSpend = bundle.getInt("totalSpend");
+        String address = bundle.getString("address");
+        String email = bundle.getString("email");
+        String job = bundle.getString("job");
+        String date = bundle.getString("date");
+        customerCurrent = new Customer(phoneNumber, passWord, name, age, gender, totalSpend, address, email, job, date);
+
         if(listServiceChose == null || listServiceChose.size()<1){
             listServiceChose = new ArrayList<>();
             listServiceChose.add(serviceDAO.chooseOne(1));
         }
 
-        Toast.makeText(this, customerCurrent.getName(), Toast.LENGTH_SHORT).show();
+
 
         //ánh xạ
         BottomNavigationView bottomNavigationView =findViewById(R.id.bottomNavigationView) ;
@@ -112,23 +131,23 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_change_password, null);
         EditText edtOldPass = view.findViewById(R.id.edtOldPassword);
+        ImageView ivOut = view.findViewById(R.id.ivOut);
         EditText edtNewPass = view.findViewById(R.id.edtNewPassword);
         EditText edtRePass = view.findViewById(R.id.edtRePassword);
-        AppCompatButton btnCancel = view.findViewById(R.id.btnCancel);
         AppCompatButton btnChange = view.findViewById(R.id.btnChange);
 
-        if(!(customerDAO instanceof CustomerDAO)){
-            customerDAO = new CustomerDAO(MainActivity.this);
-        }
-
-
         builder.setView(view);
-
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(false);
         alertDialog.show();
 
+        ivOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,39 +159,40 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     if ((newPass.equals(rePass))) {
-                        int check = customerDAO.changePassword(customerCurrent.getPhoneNumber(), olpPass, newPass);
-                        if (check == 1) {
-                            Toast.makeText(MainActivity.this, "đã lưu", Toast.LENGTH_SHORT).show();
-                            Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
-                            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            customerCurrent = null;
-                            finish();
-                            startActivity(intent1);
-                        } else if (check == 0) {
-                            Toast.makeText(MainActivity.this, "mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "có lỗi, thử lại sau", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(MainActivity.this, "nhập mật khẩu mới không trùng", Toast.LENGTH_SHORT).show();
+                        
+                        Customer customer = new Customer(customerCurrent.getPhoneNumber(), newPass);
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(ServiceAPI.Service_Customer)
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+
+                        ServiceAPI service = retrofit.create(ServiceAPI.class);
+                        Call<Customer> editPass = service.editPass(customer);
+                        editPass.enqueue(new Callback<Customer>() {
+                            @Override
+                            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                                Toast.makeText(MainActivity.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                                alertDialog.cancel();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Customer> call, Throwable t) {
+                                Toast.makeText(MainActivity.this, "Lỗi API", Toast.LENGTH_SHORT).show();
+                            }
+
+                        });
                     }
                 }
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
     }
     public void showDialogConfirm () {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this).setNegativeButton("có", null).setPositiveButton("hủy", null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirm, null);
-        if(!(customerDAO instanceof CustomerDAO)){
-            customerDAO = new CustomerDAO(MainActivity.this);
-        }
+        AppCompatButton btnCancel = findViewById(R.id.btnCancel);
+        AppCompatButton btnChange = findViewById(R.id.btnChange);
+
         builder.setView(view);
 
 
@@ -180,14 +200,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                customerCurrent = null;
+            public void onClick(View view) {
+                alertDialog.cancel();
+            }
+        });
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginRegisterActivity.class));
                 finish();
-                startActivity(intent1);
             }
         });
     }

@@ -9,93 +9,81 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.duan1_customer.MainActivity;
 import com.example.duan1_customer.R;
-import com.example.duan1_customer.adapter.SlideBannerAdapter;
+import com.example.duan1_customer.adapter.ProductAdapter;
 import com.example.duan1_customer.adapter.SlideTopProductAdapter;
 import com.example.duan1_customer.database.ProductDAO;
 import com.example.duan1_customer.model.Product;
+import com.example.duan1_customer.model.ServiceAPI;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    RecyclerView rcView,rcViewTopProduct;
-    ProductDAO productDAO;
-    ArrayList<Product> listProduct;
+    RecyclerView rcViewTopProduct;
 
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        rcView = view.findViewById(R.id.rcView);
         rcViewTopProduct = view.findViewById(R.id.rcViewTopProduct);
+        TextView name = view.findViewById(R.id.name);
+        name.setText(((MainActivity)getContext()).customerCurrent.getName());
 
-        ArrayList<Integer> listImg = new ArrayList<>();
-        productDAO = new ProductDAO(getContext());
-        listProduct = productDAO.getListProduct();
-        listImg.add(R.drawable.banner4);
-        listImg.add(R.drawable.banner3);
-        listImg.add(R.drawable.banner2);
-        listImg.add(R.drawable.banner1);
+        ImageSlider imageSlider =  view.findViewById(R.id.imgSlider);
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
 
-        SlideBannerAdapter adapter = new SlideBannerAdapter(getContext(), listImg);
-        SlideTopProductAdapter topProductAdapter = new SlideTopProductAdapter(getContext(), listProduct);
+        slideModels.add(new SlideModel(R.drawable.banner1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.banner2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.banner3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.banner4, ScaleTypes.FIT));
+        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
-        rcView.setLayoutManager(linearLayoutManager);
-        rcViewTopProduct.setLayoutManager(linearLayoutManager2);
-        rcView.setAdapter(adapter);
-        rcViewTopProduct.setAdapter(topProductAdapter);
+        listProduct();
+
+
         return view;
+    }
+
+    private void listProduct(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ServiceAPI.Service_Product)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ServiceAPI service = retrofit.create(ServiceAPI.class);
+        Call<ArrayList<Product>> getProduct = service.getProduct();
+        getProduct.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                ArrayList<Product> topListProduct = response.body();
+                    SlideTopProductAdapter topProductAdapter = new SlideTopProductAdapter(getContext(), topListProduct);
+
+                    LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+                    linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+                    rcViewTopProduct.setLayoutManager(linearLayoutManager2);
+                    rcViewTopProduct.setAdapter(topProductAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+            }
+        });
     }
 }

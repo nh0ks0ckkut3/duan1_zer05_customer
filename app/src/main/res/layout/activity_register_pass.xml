@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterPassActivity">
+    <ImageView
+        android:id="@+id/ivOut"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon_out"/>
+    <TextView
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="22dp"
+        android:text="Anh vui lòng nhập mật khẩu"/>
+    <TextView
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="21dp"
+        android:text="(gồm 6 chữ số)"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#5E5E5E"
+            android:textSize="15dp"
+            android:text="Số điện thoại đăng ký: "/>
+        <TextView
+            android:id="@+id/tvSetPhone"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#5E5E5E"
+            android:textSize="17dp"
+            android:paddingStart="5dp"
+            android:text="0776616818 "/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edtPass"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:paddingStart="20dp"
+            android:textSize="25dp"
+            android:hint="12345"/>
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/icon_x"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quên mật khẩu"
+        android:textColor="#37DD34"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="-10dp"
+        android:paddingStart="330dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/icon_circle"/>
+        <ImageView
+            android:id="@+id/ivRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-42.5dp"
+            android:layout_marginStart="9dp"
+            android:background="@drawable/icon_right"/>
+    </LinearLayout>
+
+
+</LinearLayout>

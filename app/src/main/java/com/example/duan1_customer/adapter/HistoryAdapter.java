@@ -37,7 +37,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
         holder.tvStylist.setText(list.get(position).getUserNameEmployee());
-        holder.tvService.setText(list.get(position).getNameService());
         holder.tvDate.setText(list.get(position).getTime());
         holder.tvTotalPrice.setText(list.get(position).getTotalPrice()+"");
     }
@@ -54,8 +53,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvStylist = itemView.findViewById(R.id.tvStylist);
-            tvSkinner = itemView.findViewById(R.id.tvSkinner);
-            tvService = itemView.findViewById(R.id.tvService);
             tvPayMethod = itemView.findViewById(R.id.tvPayMethod);
             tvTotalPrice = itemView.findViewById(R.id.tvTotalPrice);
             tvDate = itemView.findViewById(R.id.tvDate);

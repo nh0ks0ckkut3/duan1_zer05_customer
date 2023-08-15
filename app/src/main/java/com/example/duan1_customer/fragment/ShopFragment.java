@@ -13,77 +13,60 @@ import android.view.ViewGroup;
 import com.example.duan1_customer.R;
 import com.example.duan1_customer.adapter.ProductAdapter;
 import com.example.duan1_customer.database.ProductDAO;
+import com.example.duan1_customer.model.Customer;
 import com.example.duan1_customer.model.Product;
+import com.example.duan1_customer.model.ServiceAPI;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShopFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ShopFragment extends Fragment {
 
     RecyclerView rcViewProduct;
-    ProductDAO productDAO;
-    ArrayList<Product> listProduct;
     GridLayoutManager gridLayoutManager;
     ProductAdapter adapter;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ShopFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShopFragment newInstance(String param1, String param2) {
-        ShopFragment fragment = new ShopFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
-
         rcViewProduct = view.findViewById(R.id.rcViewProduct);
-        productDAO = new ProductDAO(getContext());
-        productDAO.addProduct(new Product("Iphone 18 pro max 12T",30000,"chiếc",100,"Apple","điện thoại"));
-        listProduct = productDAO.getListProduct();
         gridLayoutManager = new GridLayoutManager(getContext(),2);
-        adapter = new ProductAdapter(getContext(), listProduct);
-        rcViewProduct.setLayoutManager(gridLayoutManager);
-        rcViewProduct.setAdapter(adapter);
+
+        uploadProduct();
+
+
+        ;
 
         return view;
+    }
+
+    private void uploadProduct(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ServiceAPI.Service_Product)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ServiceAPI service = retrofit.create(ServiceAPI.class);
+        Call<ArrayList<Product>> getProduct = service.getProduct();
+        getProduct.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                ArrayList<Product> getListProduct = response.body();
+                adapter = new ProductAdapter(getContext(), getListProduct);
+                rcViewProduct.setLayoutManager(gridLayoutManager);
+                rcViewProduct.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+            }
+        });
     }
 }

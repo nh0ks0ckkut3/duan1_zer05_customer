@@ -4,133 +4,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.ProfileFragment">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginEnd="10dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_avatar"
-                android:background="@drawable/layout_circle"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/name"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:text="Thanh Hòa"/>
-                <TextView
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="Muốn Dzai đến Zero5"/>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:paddingVertical="15dp"
-            android:background="@drawable/gardient_dark"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#C3BCBC">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:background="@drawable/gardient_gold"
-                    android:layout_marginTop="30dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/skinner"/>
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_zero5"/>
                 <LinearLayout
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/name"
+                        android:textColor="#4B4848"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Liệu trình vàng - Tri ân khách hàng"
-                        android:textSize="17sp"
-                        android:textColor="#DF911B"/>
+                        android:layout_height="24dp"
+                        android:text="Thanh Hòa"/>
                     <TextView
+                        android:layout_marginBottom="5dp"
+                        android:textColor="#4A4949"
+                        android:textSize="12sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:text="Muốn Dzai đến Zero5"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:paddingVertical="15dp"
+                android:background="@drawable/gardient_dark"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F1F1F1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:background="@drawable/gardient_gold"
+                        android:layout_marginTop="30dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/skinner"/>
+                    <LinearLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ưu đãi mua 6 tặng 1 hoặc mua 10 tặng 2 với các liệu trình\n
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Liệu trình vàng - Tri ân khách hàng"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#FF9393"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ưu đãi mua 6 tặng 1 hoặc mua 10 tặng 2 với các liệu trình\n
 Gội massage siêu thư giản\n
 Gội massage đá nóng Himalaya\n
 Gội thư giãn Midnight\n
 Chăm sóc da chuyên sâu Lightsmoothh\n
 Gội masage Đả thông kinh lạc ngũ hành"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:textFontWeight="400"
-                        android:lineHeight="20dp"/>
+                            android:textColor="#4A4949"
+                            android:textSize="12sp"
+                            android:lineHeight="14dp"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
+                <TextView
+                    android:text="XEM CHI TIẾT LIỆU TRÌNH"
+                    android:textAlignment="center"
+                    android:background="@drawable/gardient_gold"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="13dp"
+                    android:textSize="13sp"
+                    android:textColor="#4A4949"
+                    android:layout_marginStart="130dp"
+                    android:textStyle="bold"
+                    android:layout_width="220dp"
+                    android:layout_height="45dp"/>
 
             </LinearLayout>
-            <TextView
-                android:text="XEM CHI TIẾT LIỆU TRÌNH"
-                android:textAlignment="center"
-                android:background="@drawable/gardient_gold"
-                android:layout_marginHorizontal="20dp"
-                android:paddingVertical="13dp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnDetailProfile"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:background="@drawable/background_item_profile"
+                android:layout_gravity="center"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="40dp"
                 android:paddingHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginTop="10dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="50dp"
-                    android:src="@drawable/baseline_person_outline_24"/>
+                    android:layout_marginTop="15dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_user"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
@@ -147,18 +151,20 @@ Gội masage Đả thông kinh lạc ngũ hành"
             <LinearLayout
                 android:id="@+id/btnHistory"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:background="@drawable/background_item_profile"
+                android:layout_gravity="center"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
                 android:paddingHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="35dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="50dp"
-                    android:src="@drawable/baseline_content_cut_24"/>
+                    android:src="@drawable/icon_history"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
@@ -175,18 +181,20 @@ Gội masage Đả thông kinh lạc ngũ hành"
 
             <LinearLayout
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:background="@drawable/background_item_profile"
+                android:layout_gravity="center"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
                 android:paddingHorizontal="12dp"
-            android:id="@+id/btnChangePass"
+                android:id="@+id/btnChangePass"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="40dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="50dp"
                     android:src="@drawable/baseline_lock_24"/>
                 <TextView
                     android:layout_width="0dp"
@@ -203,19 +211,21 @@ Gội masage Đả thông kinh lạc ngũ hành"
             </LinearLayout>
             <LinearLayout
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:background="@drawable/background_item_profile"
+                android:layout_gravity="center"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/btnLogOut"
                 android:paddingHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="30dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="50dp"
-                    android:src="@drawable/baseline_key_24"/>
+                    android:src="@drawable/icon_exit"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
@@ -230,7 +240,5 @@ Gội masage Đả thông kinh lạc ngũ hành"
 
             </LinearLayout>
         </LinearLayout>
-
-
-
+    </ScrollView>
 </FrameLayout>
