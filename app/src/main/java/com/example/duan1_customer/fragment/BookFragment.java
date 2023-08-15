@@ -185,7 +185,7 @@ public class BookFragment extends Fragment {
             checkExistCustomer(billAdd.getPhoneNumberCustomer());
 
         }else{
-            Toast.makeText(getContext(), "khách hàng này đã có lịch đặt hôm nay", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "bạn đã có lịch đặt của hôm nay", Toast.LENGTH_SHORT).show();
         }
     }
     private void checkExistCustomer(String phoneNumberCustomer){
@@ -354,11 +354,12 @@ public class BookFragment extends Fragment {
         if(result){
             // đã add detailService và productService
             if(flagProduct){
-                ((MainActivity)getContext()).setBillAdd(null);
+                ((MainActivity)getContext()).setBillAdd(new Bill(billAdd.getPhoneNumberCustomer(),billAdd.getNameCustomer(),"","","",billAdd.getDate()));
                 ((MainActivity)getContext()).setListServiceSelectedAdd(new ArrayList<>());
                 ((MainActivity)getContext()).setListProductSelectedAdd(new ArrayList<>());
                 flagService = false;
                 flagProduct = false;
+                Toast.makeText(getContext(), "đặt lịch thành công", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getContext()).addFragment(new BookFragment());}
         }else{
             Toast.makeText(getContext(), "errol5", Toast.LENGTH_SHORT).show();
