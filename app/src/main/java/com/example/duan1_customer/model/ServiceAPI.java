@@ -15,6 +15,7 @@ public interface ServiceAPI {
     String BASE_Service = "https://apis.dinhnt.com";
     String Service_Customer = "https://sub1.tridinhne.click/api_customer/";
     String Service_Product = "https://sub1.tridinhne.click/api_product/";
+    String BASE_API_ZERO5 = "https://sub1.tridinhne.click/api/";
 
     @GET("edu.json")
     Observable<ModelChannel> getChannel();
@@ -34,6 +35,35 @@ public interface ServiceAPI {
     Call<ArrayList<Bill>> showHistory(@Query("phoneNumberCustomer") String phoneNumber);
 
 
+    //base_api_zero5
+    @GET("GetListService.php")
+    Observable<ArrayList<Service>> getListService();
 
+    @GET("GetListProduct.php")
+    Observable<ArrayList<Product>> getListProduct();
+
+    @GET("GetListEmployee.php")
+    Observable<ArrayList<Employee>> getListEmployee();
+
+    @GET("GetBookingAPI.php"+"/{phoneNumberCustomer}")
+    Observable<Integer> getBookingAPI(@Query("phoneNumberCustomer") String phoneNumberCustomer);
+
+    @GET("CheckExistCustomer.php")
+    Observable<Boolean> checkExistCustomer(@Query("phoneNumberCustomer") String phoneNumberCustomer);
+
+    @GET("CreateNewCustomer.php")
+    Observable<Boolean> createNewCustomer(@Query("phoneNumberCustomer") String phoneNumberCustomer, @Query("name") String name);
+
+    @POST("CreateNewBooking.php")
+    Observable<Boolean> CreateNewBooking(@Body Bill bill);
+
+    @GET("LayIDBillVuaDuocThem.php")
+    Observable<Integer> layIDBillVuaDuocThem(@Query("phoneNumberCustomer") String phoneNumberCustomer);
+
+    @POST("AddServiceDetail.php")
+    Observable<Boolean> addServiceDetail(@Body ServiceDetail serviceDetail);
+
+    @POST("AddProductDetail.php")
+    Observable<Boolean> addProductDetail(@Body ProductDetail productDetail);
 
 }

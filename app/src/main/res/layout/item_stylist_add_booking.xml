@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:id="@+id/itemStylist"
+    android:layout_marginEnd="28dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layoutSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/avatar"
+            android:background="@drawable/radius_avatar"
+            android:scaleType="centerCrop"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvClassify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stylist"
+        android:textColor="@color/darkText"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="14dp"/>
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bá Sơn"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginTop="9dp"/>
+</LinearLayout>

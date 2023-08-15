@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 
 import com.example.duan1_customer.R;
 import com.example.duan1_customer.adapter.ProductAdapter;
-import com.example.duan1_customer.database.ProductDAO;
-import com.example.duan1_customer.model.Customer;
 import com.example.duan1_customer.model.Product;
 import com.example.duan1_customer.model.ServiceAPI;
 

@@ -3,15 +3,11 @@ package com.example.duan1_customer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,22 +16,21 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.example.duan1_customer.adapter.ListServiceChooseAdapter;
-import com.example.duan1_customer.database.CustomerDAO;
-import com.example.duan1_customer.database.ServiceDAO;
 import com.example.duan1_customer.fragment.ProfileFragment;
 import com.example.duan1_customer.fragment.BookFragment;
 import com.example.duan1_customer.fragment.HomeFragment;
 import com.example.duan1_customer.fragment.NewsFragment;
 import com.example.duan1_customer.fragment.ShopFragment;
+import com.example.duan1_customer.model.Bill;
 import com.example.duan1_customer.model.Customer;
+import com.example.duan1_customer.model.Product;
 import com.example.duan1_customer.model.Service;
 import com.example.duan1_customer.model.ServiceAPI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,15 +44,16 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     FrameLayout fl_main;
     public Customer customerCurrent;
-    CustomerDAO customerDAO;
-    ServiceDAO serviceDAO;
-    ArrayList<Service> listServiceChose;
+    public String dateCurrent;
+    private ArrayList<Service> listServiceSelectedAdd;
+    private ArrayList<Product> listProductSelectedAdd;
+    private Bill billAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        serviceDAO = new ServiceDAO(MainActivity.this);
+
         fl_main = findViewById(R.id.fl_main);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -73,13 +69,25 @@ public class MainActivity extends AppCompatActivity {
         String job = bundle.getString("job");
         String date = bundle.getString("date");
         customerCurrent = new Customer(phoneNumber, passWord, name, age, gender, totalSpend, address, email, job, date);
-
-        if(listServiceChose == null || listServiceChose.size()<1){
-            listServiceChose = new ArrayList<>();
-            listServiceChose.add(serviceDAO.chooseOne(1));
+        Calendar calendar = Calendar.getInstance();
+        String day,month;
+        if((calendar.get(Calendar.MONTH)+1) < 10){
+            month = "0" + (calendar.get(Calendar.MONTH)+1)+"/";
+        }else{
+            month = (calendar.get(Calendar.MONTH)+1)+"/";
         }
+        if(calendar.get(Calendar.DAY_OF_MONTH) < 10){
+            day = "0" + calendar.get(Calendar.DAY_OF_MONTH)+"/";
+        }else{
+            day = calendar.get(Calendar.DAY_OF_MONTH)+"/";
+        }
+        dateCurrent = day+month+calendar.get(Calendar.YEAR);
 
-
+        if(!(billAdd != null)){
+            billAdd = new Bill(phoneNumber,name,"","","",dateCurrent);
+            listServiceSelectedAdd = new ArrayList<>();
+            listProductSelectedAdd = new ArrayList<>();
+        }
 
         //ánh xạ
         BottomNavigationView bottomNavigationView =findViewById(R.id.bottomNavigationView) ;
@@ -104,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.menu_book:
-                        fragment = new BookFragment(listServiceChose);
+                        fragment = new BookFragment();
                         break;
                     case R.id.menu_news:
                         fragment = new NewsFragment();
@@ -186,66 +194,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void showDialogConfirm () {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_confirm, null);
-        AppCompatButton btnCancel = findViewById(R.id.btnCancel);
-        AppCompatButton btnChange = findViewById(R.id.btnChange);
-
-        builder.setView(view);
 
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.cancel();
-            }
-        });
-        btnChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginRegisterActivity.class));
-                finish();
-            }
-        });
+    public Bill getBillAdd() {
+        return billAdd;
     }
-    public void showDialogChooseService(ArrayList<Service> listService,ArrayList<Service> listServiceChose){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_choose_service, null);
-        RecyclerView rcView = view.findViewById(R.id.rcView);
-        ImageView btnBack = view.findViewById(R.id.btnBack);
 
-        serviceDAO = new ServiceDAO(MainActivity.this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this,2);
-        rcView.setLayoutManager(gridLayoutManager);
-        ListServiceChooseAdapter listServiceChooseAdapter = new ListServiceChooseAdapter(MainActivity.this, listService, listServiceChose);
-        rcView.setAdapter(listServiceChooseAdapter);
-        builder.setView(view);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addFragment(new BookFragment(listServiceChose));
-                alertDialog.dismiss();
-            }
-        });
-
-
-
-
+    public void setBillAdd(Bill billAdd) {
+        this.billAdd = billAdd;
     }
-    public void addService(int id){
-        listServiceChose.add(serviceDAO.chooseOne(id));
+    public ArrayList<Service> getListServiceSelectedAdd() {
+        return listServiceSelectedAdd;
     }
-    public void minusService(int index){
-        listServiceChose.remove(index);
+
+    public void setListServiceSelectedAdd(ArrayList<Service> listServiceSelectedAdd) {
+        this.listServiceSelectedAdd = listServiceSelectedAdd;
+    }
+    public ArrayList<Product> getListProductSelectedAdd() {
+        return listProductSelectedAdd;
+    }
+
+    public void setListProductSelectedAdd(ArrayList<Product> listProductSelectedAdd) {
+        this.listProductSelectedAdd = listProductSelectedAdd;
     }
 }

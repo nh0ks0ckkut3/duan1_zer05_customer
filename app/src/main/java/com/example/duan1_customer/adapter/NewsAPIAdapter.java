@@ -26,6 +26,7 @@ public class NewsAPIAdapter extends RecyclerView.Adapter<NewsAPIAdapter.ViewHold
     private Context context;
     private ArrayList<Item> list;
     private String linkImg;
+    private String content;
 
     public NewsAPIAdapter(Context context, ArrayList<Item> list) {
         this.context = context;
@@ -44,7 +45,9 @@ public class NewsAPIAdapter extends RecyclerView.Adapter<NewsAPIAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tvTitle.setText(list.get(position).getTitle());
-        holder.tvPubDate.setText(list.get(position).getPubDate());
+        content = list.get(position).getDescription().get__cdata();
+        content=content.substring((content.indexOf("/a></br>")+8));
+        holder.tvPubDate.setText(content);
         linkImg = list.get(position).getDescription().get__cdata();
         int begin = linkImg.indexOf("<img src=");
         if(begin > 0){
@@ -68,9 +71,9 @@ public class NewsAPIAdapter extends RecyclerView.Adapter<NewsAPIAdapter.ViewHold
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebviewActivity.class);
-                intent.putExtra("linkNews", list.get(position).getLink());
-                ((Activity)context).startActivity(intent);
+//                Intent intent = new Intent(context, WedViewActivity.class);
+//                intent.putExtra("linkNews", list.get(position).getLink());
+//                ((Activity)context).startActivity(intent);
             }
         });
 

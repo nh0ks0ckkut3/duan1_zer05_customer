@@ -12,8 +12,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.duan1_customer.database.CustomerDAO;
 import com.example.duan1_customer.model.Customer;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     String phoneNumber, pass;
-    CustomerDAO customerDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         edtPassWord = findViewById(R.id.edtPassWord);
         icon_pass = findViewById(R.id.icon_pass);
         chkRemember = findViewById(R.id.chkRemember);
-        customerDAO = new CustomerDAO(this);
 
         icon_pass.setBackgroundResource(R.drawable.hidepass);
         icon_pass.setOnClickListener(new View.OnClickListener() {
@@ -75,26 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean isCorrect = false;
                 if (phoneNumber.length() > 0 && pass.length() > 0){
-                    for(Customer customer: customerDAO.getListCustomer()) {
-                        if (phoneNumber.equals(customer.getPhoneNumber()) && pass.equals(customer.getPassWord())) {
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("customerCurrent",customer);
-                            intent.putExtras(bundle);
 
-                            isCorrect = true;
-                            boolean isRemember = chkRemember.isChecked();
-                            sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean("isRemember", isRemember);
-                            editor.putString("phoneNumber", phoneNumber);
-                            editor.putString("pass", pass);
-                            editor.apply();
-                            finish();
-                            startActivity(intent);
-                        }
-                    }
                     if(!isCorrect){
                         Toast.makeText(LoginActivity.this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
                     }

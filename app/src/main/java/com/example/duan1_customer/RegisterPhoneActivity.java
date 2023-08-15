@@ -3,6 +3,7 @@ package com.example.duan1_customer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ public class RegisterPhoneActivity extends AppCompatActivity {
     ImageView ivDelete, ivRight;
     String numPhone;
 
+    Intent intentRegisterPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,8 @@ public class RegisterPhoneActivity extends AppCompatActivity {
         edtPhone = findViewById(R.id.edtPhone);
         ivDelete = findViewById(R.id.ivDelete);
         ivRight = findViewById(R.id.ivRight);
+        intentRegisterPass = new Intent(RegisterPhoneActivity.this, RegisterPassActivity.class);
+
 
 
         ivDelete.setOnClickListener(new View.OnClickListener() {

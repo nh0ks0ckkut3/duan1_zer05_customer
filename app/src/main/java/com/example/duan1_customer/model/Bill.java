@@ -8,58 +8,96 @@ public class Bill implements Serializable {
     @SerializedName("idBill")
     private int id;
     private String phoneNumberCustomer;
+    private String nameCustomer;
     private String userNameEmployee;
-    private int idService;
-    private int idProduct;
+    private String bookTime;
+    private int sumService;
+    private int sumProduct;
     private String time;
     private String status;
     private int totalPrice;
-    private String nameEmployee;
-    private String nameService;
-    private String nameProduct;
+    private String date;
 
-    public Bill(int id, String phoneNumberCustomer, String nameEmployee, String nameService, String nameProduct, String time, int totalPrice) {
-        this.id = id;
-        this.phoneNumberCustomer = phoneNumberCustomer;
-        this.time = time;
-        this.totalPrice = totalPrice;
-        this.nameEmployee = nameEmployee;
-        this.nameProduct = nameProduct;
-        this.nameService = nameService;
+    public Bill(){
+
     }
 
-    public Bill(int id, String phoneNumberCustomer, String userNameEmployee, String time, String status, int totalPrice) {
+    public Bill(int id, String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String bookTime, int sumService, int sumProduct, String time, String status, int totalPrice, String date) {
+        this.id = id;
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.nameCustomer = nameCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.bookTime = bookTime;
+        this.sumService = sumService;
+        this.sumProduct = sumProduct;
+        this.time = time;
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.date = date;
+    }
+
+    public Bill(String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String bookTime, int sumService, int sumProduct, String time, String status, int totalPrice, String date) {
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.nameCustomer = nameCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.bookTime = bookTime;
+        this.sumService = sumService;
+        this.sumProduct = sumProduct;
+        this.time = time;
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.date = date;
+    }
+    public Bill(String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String time, String status, String date) {
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.nameCustomer = nameCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.time = time;
+        this.status = status;
+        this.date = date;
+    }
+
+    public Bill(int id, String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String bookTime, int sumService, int sumProduct, String time, String status, int totalPrice) {
+        this.id = id;
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.nameCustomer = nameCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.bookTime = bookTime;
+        this.sumService = sumService;
+        this.sumProduct = sumProduct;
+        this.time = time;
+        this.status = status;
+        this.totalPrice = totalPrice;
+    }
+
+    public Bill(String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String time, String status) {
+        this.phoneNumberCustomer = phoneNumberCustomer;
+        this.nameCustomer = nameCustomer;
+        this.userNameEmployee = userNameEmployee;
+        this.time = time;
+        this.status = status;
+    }
+    //    public Bill(int id, String phoneNumberCustomer, String nameCustomer, String userNameEmployee, String bookTime, String status) {
+//        this.id = id;
+//        this.phoneNumberCustomer = phoneNumberCustomer;
+//        this.nameCustomer = nameCustomer;
+//        this.userNameEmployee = userNameEmployee;
+//        this.bookTime = bookTime;
+//        this.status = status;
+//    }
+    public Bill(int id, String phoneNumberCustomer, String userNameEmployee, String time, String status, int totalPrice, String nameCustomer, int sumService, int sumProduct){
         this.id = id;
         this.phoneNumberCustomer = phoneNumberCustomer;
         this.userNameEmployee = userNameEmployee;
         this.time = time;
         this.status = status;
         this.totalPrice = totalPrice;
+        this.nameCustomer = nameCustomer;
+        this.sumService = sumService;
+        this.sumProduct = sumProduct;
     }
 
-    public String getNameEmployee() {
-        return nameEmployee;
-    }
 
-    public void setNameEmployee(String nameEmployee) {
-        this.nameEmployee = nameEmployee;
-    }
-
-    public String getNameService() {
-        return nameService;
-    }
-
-    public void setNameService(String nameService) {
-        this.nameService = nameService;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
 
     public int getId() {
         return id;
@@ -77,6 +115,14 @@ public class Bill implements Serializable {
         this.phoneNumberCustomer = phoneNumberCustomer;
     }
 
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
+    }
+
     public String getUserNameEmployee() {
         return userNameEmployee;
     }
@@ -85,20 +131,28 @@ public class Bill implements Serializable {
         this.userNameEmployee = userNameEmployee;
     }
 
-    public int getIdService() {
-        return idService;
+    public String getBookTime() {
+        return bookTime;
     }
 
-    public void setIdService(int idService) {
-        this.idService = idService;
+    public void setBookTime(String bookTime) {
+        this.bookTime = bookTime;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public int getSumService() {
+        return sumService;
     }
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
+    public void setSumService(int sumService) {
+        this.sumService = sumService;
+    }
+
+    public int getSumProduct() {
+        return sumProduct;
+    }
+
+    public void setSumProduct(int sumProduct) {
+        this.sumProduct = sumProduct;
     }
 
     public String getTime() {
@@ -123,5 +177,13 @@ public class Bill implements Serializable {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

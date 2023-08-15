@@ -1,19 +1,46 @@
 package com.example.duan1_customer.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Employee implements Serializable {
+    @SerializedName("userNameEmployee")
     private String userName;
     private String passWord;
     private String name;
     private int age;
+    private String birthDay;
+    private String phoneNumber;
+    private String email;
+    private String address;
     private String gender;
     private int salary;
     private String dayStartWork;
     private int countDayOfMonth;
     private String classify;
+    private String img;
+
+    public Employee() {
+    }
+
+    public Employee(String userName, String passWord, String name, String birthDay, String phoneNumber, String email, String address, String gender, int salary, String dayStartWork, String classify, String img) {
+        this.userName = userName;
+        this.passWord = passWord;
+        this.name = name;
+        this.birthDay = birthDay;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.gender = gender;
+        this.salary = salary;
+        this.dayStartWork = dayStartWork;
+        this.classify = classify;
+        this.img = img;
+    }
 
     public Employee(String userName, String passWord, String name, int age, String gender, int salary, String dayStartWork, int countDayOfMonth, String classify) {
+
         this.userName = userName;
         this.passWord = passWord;
         this.name = name;
@@ -35,6 +62,40 @@ public class Employee implements Serializable {
         this.classify = classify;
         this.countDayOfMonth = 0;
         this.salary = 0;
+    }
+
+    public Employee(String userName, String passWord) {
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
+    public Employee (String userName, String name, String birthDay, String gender, String phoneNumber, String address, String classify, String dayStartWork, int salary){
+        this.userName = userName;
+        this.name = name;
+        this.birthDay = birthDay;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.classify = classify;
+        this.dayStartWork = dayStartWork;
+        this.salary = salary;
+    }
+
+    public Employee (String userName, String passWord, String name, int age, String gender, int salary, String dayStartWork, int countDayOfMonth, String classify, String birthDay, String email, String address, String img, String phoneNumber){
+        this.userName = userName;
+        this.passWord = passWord;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.salary = salary;
+        this.dayStartWork = dayStartWork;
+        this.countDayOfMonth = countDayOfMonth;
+        this.classify = classify;
+        this.birthDay = birthDay;
+        this.email = email;
+        this.address = address;
+        this.img = img;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getUserName() {
@@ -107,5 +168,45 @@ public class Employee implements Serializable {
 
     public void setClassify(String classify) {
         this.classify = classify;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

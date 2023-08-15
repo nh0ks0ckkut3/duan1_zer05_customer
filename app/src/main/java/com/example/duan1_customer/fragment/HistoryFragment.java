@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.example.duan1_customer.MainActivity;
 import com.example.duan1_customer.R;
 import com.example.duan1_customer.adapter.HistoryAdapter;
-import com.example.duan1_customer.database.BillDAO;
 import com.example.duan1_customer.model.Bill;
 import com.example.duan1_customer.model.ServiceAPI;
 

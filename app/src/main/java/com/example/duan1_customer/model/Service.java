@@ -3,13 +3,14 @@ package com.example.duan1_customer.model;
 import java.io.Serializable;
 
 public class Service implements Serializable {
-    private int id;
+    private int idService;
     private String name;
     private int price;
     private String classifyEmployee;
+    private String imageService;
 
     public Service(int id, String name, int price, String classifyEmployee) {
-        this.id = id;
+        this.idService = id;
         this.name = name;
         this.price = price;
         this.classifyEmployee = classifyEmployee;
@@ -21,12 +22,43 @@ public class Service implements Serializable {
         this.classifyEmployee = classifyEmployee;
     }
 
+    public Service(int idService, String name, int price, String classifyEmployee, String imageService) {
+        this.idService = idService;
+        this.name = name;
+        this.price = price;
+        this.classifyEmployee = classifyEmployee;
+        this.imageService = imageService;
+    }
+
+    public Service(String name, int price, String classifyEmployee, String imageService) {
+        this.name = name;
+        this.price = price;
+        this.classifyEmployee = classifyEmployee;
+        this.imageService = imageService;
+    }
+
+    public int getIdService() {
+        return idService;
+    }
+
+    public void setIdService(int idService) {
+        this.idService = idService;
+    }
+
+    public String getImageService() {
+        return imageService;
+    }
+
+    public void setImageService(String imageService) {
+        this.imageService = imageService;
+    }
+
     public int getId() {
-        return id;
+        return idService;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idService = id;
     }
 
     public String getName() {

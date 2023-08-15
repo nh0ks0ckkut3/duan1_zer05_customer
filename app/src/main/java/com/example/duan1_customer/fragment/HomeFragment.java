@@ -16,9 +16,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.duan1_customer.MainActivity;
 import com.example.duan1_customer.R;
-import com.example.duan1_customer.adapter.ProductAdapter;
 import com.example.duan1_customer.adapter.SlideTopProductAdapter;
-import com.example.duan1_customer.database.ProductDAO;
 import com.example.duan1_customer.model.Product;
 import com.example.duan1_customer.model.ServiceAPI;
 

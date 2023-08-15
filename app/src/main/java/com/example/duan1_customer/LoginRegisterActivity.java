@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 public class LoginRegisterActivity extends AppCompatActivity {
     AppCompatButton btnRegister;
     ImageSlider imgSlide;
+    SharedPreferences sharedPreferences;
+    String numPhone;
+    Intent intentRegisterPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,17 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
         btnRegister = findViewById(R.id.btnRegister);
         imgSlide = findViewById(R.id.imgSlide);
+        intentRegisterPass = new Intent(LoginRegisterActivity.this, RegisterPassActivity.class);
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        numPhone = sharedPreferences.getString("numPhone","");
+
+        if(!(numPhone.equals(""))){
+            Bundle bundle = new Bundle();
+            bundle.putString("numPhone", numPhone);
+            intentRegisterPass.putExtras(bundle);
+            startActivity(intentRegisterPass);
+            finish();
+        }
 
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
